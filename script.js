@@ -11,11 +11,20 @@ function search(e) {
 
 function updatePage(jsonResponse) {
     var searchResults = jsonResponse.data;
-    var results = document.getElementById("results");
-    var resultsInnerHTML = `
-    <h1>${searchResults[0].url}</h1>
-    `;
-    results.innerHTML = resultsInnerHTML;
+
+    var resultsContainer = document.getElementById("results");
+
+    var resultsInnerHTML =
+        `<h1> Results </h1>` + displaySearchResults(searchResults);
+    resultsContainer.innerHTML = resultsInnerHTML;
+}
+
+function displaySearchResults(searchResults) {
+    var searchResultsString = "";
+    searchResults.forEach((searchResult) => {
+        searchResultsString += `<li>${searchResult.title}</li>`;
+    });
+    return searchResultsString;
 }
 
 function pageLoaded() {
