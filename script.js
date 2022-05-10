@@ -1,10 +1,14 @@
-function search(e) {
-    e.preventDefault();
-    const form = new FormData(this);
-    const query = form.get("search");
+function search(formSubmitEvent) {
+    formSubmitEvent.preventDefault();
+    const formData = new FormData(this); //this means whatever the function is getting, refers to an object
+    const query = formData.get("search");
+    const rating = formData.get("rating");
+    const animeType = formData.get("animeType");
     console.log(query);
 
-    fetch(`https://api.jikan.moe/v4/anime?q=${query}`)
+    fetch(
+        `https://api.jikan.moe/v4/anime?q=${query}&rating=${rating}&type=${animeType}`
+    )
         .then((response) => response.json())
         .then(updatePage);
 }
